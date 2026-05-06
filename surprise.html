@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Little Something Special 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #944555;
+            --primary-light: #f191a1;
+            --bg-light: #faf9f9;
+            --text-dark: #1a1c1c;
+            --text-muted: #534345;
+            --border-light: rgba(217, 193, 195, 0.2);
+            --border-medium: rgba(217, 193, 195, 0.5);
+            --accent-warm: #ffdad2;
+            --accent-pink: #ffd9dd;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ============ NAVIGATION ============ */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 48px;
+            background: rgba(250, 249, 249, 0.95);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 1px 2px rgba(148, 69, 85, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            letter-spacing: -0.6px;
+            font-family: 'Georgia', serif;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 1px rgba(148, 69, 85, 0.2);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(148, 69, 85, 0.3);
+        }
+
+        /* ============ HERO SECTION ============ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 48px 48px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            margin-top: 65px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .gift-box-container {
+            margin: 40px 0;
+            display: flex;
+            justify-content: center;
+            perspective: 1000px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .gift-box {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #ffc0cb 0%, #ffb6c1 100%);
+            border-radius: 30px;
+            position: relative;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 20px 40px rgba(148, 69, 85, 0.15);
+            overflow: hidden;
+        }
+
+        .gift-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 48%, #ff69b4 50%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #ff1493 50%, transparent 52%);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            opacity: 0.6;
+        }
+
+        .gift-box::after {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 35%;
+            width: 30%;
+            height: 20%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+            border-radius: 50%;
+            animation: shine 2s ease-in-out infinite;
+        }
+
+        .gift-box:hover {
+            transform: rotateX(10deg) rotateY(10deg) scale(1.05);
+        }
+
+        .gift-box.open {
+            animation: openGift 0.8s ease-out forwards;
+        }
+
+        @keyframes openGift {
+            0% {
+                transform: rotateX(0) rotateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: rotateX(45deg) rotateY(0) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes shine {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+            font-family: 'Georgia', serif;
+            letter-spacing: -0.96px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(148, 69, 85, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(148, 69, 85, 0.3);
+        }
+
+        .cta-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* ============ COUPONS SECTION ============ */
+        .coupons-section {
+            background: var(--bg-light);
+            padding: 96px 48px;
+            border-top: 1px solid var(--border-light);
+            border-radius: 48px 48px 0 0;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+            font-family: 'Georgia', serif;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .coupons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 48px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .coupon-card {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 33px;
+            shadow: 0 1px 2px rgba(148, 69, 85, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: slideUp 0.6s ease-out backwards;
+        }
+
+        .coupon-card:nth-child(1) { animation-delay: 0.1s; }
+        .coupon-card:nth-child(2) { animation-delay: 0.2s; }
+        .coupon-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .coupon-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(148, 69, 85, 0.12);
+        }
+
+        .coupon-card::before {
+            content: '';
+            position: absolute;
+            top: -16px;
+            right: -16px;
+            width: 96px;
+            height: 96px;
+            background: linear-gradient(135deg, rgba(241, 145, 161, 0.1), transparent);
+            border-radius: 0 0 9999px 0;
+        }
+
+        .coupon-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .coupon-card:nth-child(1) .coupon-icon {
+            background: #ffdad2;
+            color: #ff7a5c;
+        }
+
+        .coupon-card:nth-child(2) .coupon-icon {
+            background: #ffd9dd;
+            color: #ff4757;
+        }
+
+        .coupon-card:nth-child(3) .coupon-icon {
+            background: #eee;
+            color: #666;
+        }
+
+        .coupon-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            font-family: 'Georgia', serif;
+        }
+
+        .coupon-description {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .coupon-divider {
+            border-top: 1px dashed var(--border-medium);
+            margin: 20px 0;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .coupon-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        .coupon-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: rgba(217, 193, 195, 0.3);
+            font-family: 'Georgia', serif;
+        }
+
+        /* ============ SURPRISE PAGE ============ */
+        .surprise-page {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff69b4 0%, #ffb6d9 50%, #ffc0cb 100%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 2000;
+            overflow: hidden;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .surprise-page.active {
+            display: flex;
+            animation: pageEntry 0.6s ease-out;
+        }
+
+        @keyframes pageEntry {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .surprise-content {
+            text-align: center;
+            color: white;
+            z-index: 10;
+            max-width: 600px;
+            padding: 40px;
+            animation: contentFloat 0.8s ease-out 0.3s backwards;
+        }
+
+        @keyframes contentFloat {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .surprise-content h1 {
+            font-size: 64px;
+            margin-bottom: 24px;
+            font-family: 'Georgia', serif;
+            font-weight: 700;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s backwards;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .surprise-content p {
+            font-size: 20px;
+            margin-bottom: 32px;
+            line-height: 1.8;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .surprise-message {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary-color);
+            padding: 32px;
+            border-radius: 16px;
+            margin: 32px 0;
+            font-size: 18px;
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: slideInDown 0.8s ease-out 0.8s backwards;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 48px;
+            opacity: 0.7;
+            animation: float-heart 8s ease-in infinite;
+        }
+
+        @keyframes float-heart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 11;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateX(-5px);
+        }
+
+        /* ============ MESSAGE PAGE ============ */
+        .message-page {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe4ec 50%, #ffc0cb 100%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 80px 20px 40px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .message-page.active {
+            display: block;
+            animation: pageEntry 0.6s ease-out;
+        }
+
+        .message-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 20px 60px rgba(148, 69, 85, 0.2);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .message-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .message-header h1 {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            font-family: 'Georgia', serif;
+            font-weight: 700;
+        }
+
+        .message-header p {
+            font-size: 16px;
+            color: var(--text-muted);
+        }
+
+        /* QUICK RESPONSES */
+        .quick-responses {
+            margin-bottom: 40px;
+        }
+
+        .response-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .response-btn {
+            background: linear-gradient(135deg, #fff0f3 0%, #ffccdd 100%);
+            border: 2px solid var(--border-light);
+            padding: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .response-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .response-btn:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 16px rgba(148, 69, 85, 0.15);
+            background: linear-gradient(135deg, #ffe4ec 0%, #ffb3d9 100%);
+        }
+
+        .response-btn:hover::before {
+            left: 100%;
+        }
+
+        .response-btn:active {
+            transform: translateY(-2px);
+        }
+
+        .response-btn .emoji {
+            font-size: 24px;
+        }
+
+        .response-btn span:last-child {
+            line-height: 1.2;
+        }
+
+        /* DIVIDER */
+        .divider {
+            text-align: center;
+            margin: 32px 0;
+            position: relative;
+            color: #ccc;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 50%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ddd);
+            margin-right: 16px;
+        }
+
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #ddd, transparent);
+            margin-left: 16px;
+        }
+
+        /* CUSTOM MESSAGE */
+        .custom-message {
+            margin-bottom: 40px;
+        }
+
+        .custom-message label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .custom-message textarea {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid var(--border-light);
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            resize: vertical;
+            transition: all 0.3s ease;
+            line-height: 1.5;
+        }
+
+        .custom-message textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(241, 145, 161, 0.1);
+            background: #fafafa;
+        }
+
+        .custom-message textarea::placeholder {
+            color: #bbb;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color), #c1556b);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(148, 69, 85, 0.2);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(148, 69, 85, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* MESSAGES RECEIVED */
+        .messages-received {
+            border-top: 2px solid var(--border-light);
+            padding-top: 40px;
+            margin-top: 40px;
+        }
+
+        .messages-received h2 {
+            font-size: 20px;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+            font-family: 'Georgia', serif;
+            font-weight: 600;
+        }
+
+        .message-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .message-item {
+            background: linear-gradient(135deg, #fef5f7 0%, #fff0f3 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+            animation: messageSlideIn 0.5s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .message-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), transparent);
+            opacity: 0;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 0.5; }
+        }
+
+        .message-time {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .message-text {
+            color: var(--text-dark);
+            font-size: 16px;
+            line-height: 1.6;
+            word-wrap: break-word;
+        }
+
+        .message-heart {
+            display: inline-block;
+            animation: heartBeat 0.6s ease-in-out;
+            margin-left: 4px;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            color: #155724;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            text-align: center;
+            font-weight: 600;
+            animation: slideDown 0.5s ease-out;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .message-container {
+                padding: 32px 20px;
+                border-radius: 16px;
+            }
+
+            .message-header h1 {
+                font-size: 24px;
+            }
+
+            .response-buttons {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .response-btn {
+                flex-direction: row;
+                justify-content: flex-start;
+                gap: 12px;
+            }
+
+            .response-btn .emoji {
+                font-size: 20px;
+            }
+
+            .message-page {
+                padding: 70px 15px 30px;
+            }
+        }
+        footer {
+            background: white;
+            border-top: 1px solid var(--border-light);
+            padding: 48px;
+            text-align: center;
+            margin-top: 96px;
+        }
+
+        .footer-brand {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 32px;
+            font-family: 'Georgia', serif;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            nav {
+                padding: 16px 24px;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .nav-links {
+                gap: 16px;
+                font-size: 14px;
+            }
+
+            .hero {
+                padding: 120px 24px 48px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .gift-box {
+                width: 200px;
+                height: 200px;
+            }
+
+            .coupons-section {
+                padding: 48px 24px;
+            }
+
+            .coupons-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .surprise-content {
+                padding: 20px;
+            }
+
+            .surprise-content h1 {
+                font-size: 48px;
+            }
+
+            .surprise-content p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-brand">vavee 💕</div>
+        <div class="nav-links">
+            <a onclick="scrollToSection('coupons')">Our Story</a>
+            <a onclick="scrollToSection('coupons')">Special Offers</a>
+        </div>
+        <button class="nav-btn">Message Me</button>
+    </nav>
+
+    <!-- MAIN PAGE -->
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>A Little Something Special</h1>
+                <p>Because every day with you is worth celebrating. I've put together a few small tokens of my affection.</p>
+                
+                <div class="gift-box-container">
+                    <div class="gift-box" id="giftBox" onclick="openGift()"></div>
+                </div>
+
+                <p style="font-size: 14px; color: #999; margin-top: 20px;">Click the gift to reveal your surprise! 🎁</p>
+            </div>
+        </section>
+
+        <!-- COUPONS SECTION -->
+        <section class="coupons-section" id="coupons">
+            <h2 class="section-title">Your Coupons Too</h2>
+            <p class="section-subtitle">Redeemable moments of pure joy and connection 💖</p>
+
+            <div class="coupons-grid">
+                <!-- COUPON 1 -->
+                <div class="coupon-card">
+                    <div class="coupon-icon">🍽️</div>
+                    <h3 class="coupon-title">One Home-Cooked Dinner</h3>
+                    <p class="coupon-description">Your favorite meal, prepared with love. I handle the cooking, the ambiance, and the cleanup. You just bring your appetite.</p>
+                    <div class="coupon-divider">
+                        <span class="coupon-label">ADMIT ONE</span>
+                        <span class="coupon-number">01</span>
+                    </div>
+                </div>
+
+                <!-- COUPON 2 -->
+                <div class="coupon-card">
+                    <div class="coupon-icon">🎬</div>
+                    <h3 class="coupon-title">One Movie Night Choice</h3>
+                    <p class="coupon-description">You have absolute veto power. Action, rom-com, or obscure documentary—tonight, you are the director of our evening.</p>
+                    <div class="coupon-divider">
+                        <span class="coupon-label">ADMIT ONE</span>
+                        <span class="coupon-number">02</span>
+                    </div>
+                </div>
+
+                <!-- COUPON 3 -->
+                <div class="coupon-card">
+                    <div class="coupon-icon">✈️</div>
+                    <h3 class="coupon-title">One Weekend Getaway</h3>
+                    <p class="coupon-description">Pack a small bag. We're escaping the routine for 48 hours of uninterrupted time together. Destination to be revealed.</p>
+                    <div class="coupon-divider">
+                        <span class="coupon-label">ADMIT TWO</span>
+                        <span class="coupon-number">03</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIGNOFF SECTION -->
+        <section style="text-align: center; padding: 96px 48px; background: white;">
+            <h2 class="section-title">To be continued...</h2>
+            <p style="font-size: 24px; margin-top: 16px;">💕</p>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-brand">vavee</div>
+        <div class="footer-links">
+            <a href="#">Our Story</a>
+            <a href="#">Love Terms</a>
+            <a href="#">Contact with ❤️</a>
+        </div>
+        <p class="footer-text">Made with love for the one who makes every day special.</p>
+    </footer>
+
+    <!-- SURPRISE PAGE -->
+    <div class="surprise-page" id="surprisePage">
+        <button class="back-btn" onclick="closeSurprise()">← Back</button>
+        
+        <div class="floating-hearts" id="heartsContainer"></div>
+
+        <div class="surprise-content">
+            <h1>I Love You! 💕</h1>
+            <p>You deserve to know how amazing you are...</p>
+
+            <div class="surprise-message">
+                <p>✨ You make my world brighter</p>
+                <p>✨ Your smile is my favorite sight</p>
+                <p>✨ Every moment with you matters</p>
+                <p>✨ You are my greatest gift</p>
+                <p style="margin-top: 20px; font-size: 24px;">Will you be mine? Forever? 💎</p>
+            </div>
+
+            <p style="margin-top: 40px; font-size: 18px;">You can redeem these coupons anytime. No expiration. Just us. 🌹</p>
+            
+            <button class="cta-btn" onclick="goToMessaging()" style="margin-top: 40px; background: white; color: var(--primary-color); border: 2px solid white;">
+                Tell Me How You Feel 💌
+            </button>
+        </div>
+    </div>
+
+    <!-- MESSAGE PAGE -->
+    <div class="message-page" id="messagePage">
+        <button class="back-btn" onclick="backToSurprise()">← Back</button>
+        
+        <div class="message-container">
+            <div class="message-header">
+                <h1>💌 Message for Me</h1>
+                <p>Tell me your feelings... I'm listening 👂❤️</p>
+            </div>
+
+            <!-- PREDEFINED RESPONSES -->
+            <div class="quick-responses">
+                <p style="text-align: center; color: #666; margin-bottom: 24px; font-size: 14px;">Or choose a quick response:</p>
+                <div class="response-buttons">
+                    <button class="response-btn" onclick="submitResponse('I love you too! 😘')">
+                        <span class="emoji">😘</span>
+                        <span>I love you too!</span>
+                    </button>
+                    <button class="response-btn" onclick="submitResponse('You make me so happy! 💕')">
+                        <span class="emoji">💕</span>
+                        <span>You make me happy!</span>
+                    </button>
+                    <button class="response-btn" onclick="submitResponse('Yes! A thousand times YES! 🎉')">
+                        <span class="emoji">🎉</span>
+                        <span>Yes! 100% YES!</span>
+                    </button>
+                    <button class="response-btn" onclick="submitResponse('You\'re my forever person 👑')">
+                        <span class="emoji">👑</span>
+                        <span>My forever person</span>
+                    </button>
+                    <button class="response-btn" onclick="submitResponse('I can\'t wait to spend forever with you! 🌹')">
+                        <span class="emoji">🌹</span>
+                        <span>Forever with you!</span>
+                    </button>
+                    <button class="response-btn" onclick="submitResponse('This is the best surprise ever! 🥰')">
+                        <span class="emoji">🥰</span>
+                        <span>Best surprise ever!</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CUSTOM MESSAGE -->
+            <div class="divider">OR</div>
+
+            <div class="custom-message">
+                <label for="messageInput">Write Your Own Message:</label>
+                <textarea id="messageInput" placeholder="Type your heartfelt message here... 💭" rows="6"></textarea>
+                <button class="submit-btn" onclick="submitCustomMessage()">Send My Message 💌</button>
+            </div>
+
+            <!-- RECEIVED MESSAGES -->
+            <div class="messages-received" id="messagesReceived">
+                <h2>📮 Messages Received</h2>
+                <div class="message-list" id="messageList">
+                    <p style="text-align: center; color: #999; padding: 40px 20px;">No messages yet... waiting for your response... 💕</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Open gift function
+        function openGift() {
+            const giftBox = document.getElementById('giftBox');
+            const surprisePage = document.getElementById('surprisePage');
+            
+            giftBox.classList.add('open');
+            
+            setTimeout(() => {
+                surprisePage.classList.add('active');
+                createFloatingHearts();
+            }, 400);
+        }
+
+        // Close surprise function
+        function closeSurprise() {
+            const giftBox = document.getElementById('giftBox');
+            const surprisePage = document.getElementById('surprisePage');
+            
+            giftBox.classList.remove('open');
+            surprisePage.classList.remove('active');
+            
+            // Reset gift box
+            setTimeout(() => {
+                giftBox.style.opacity = '1';
+            }, 300);
+        }
+
+        // Go to messaging page
+        function goToMessaging() {
+            const messagePage = document.getElementById('messagePage');
+            messagePage.classList.add('active');
+        }
+
+        // Back to surprise page
+        function backToSurprise() {
+            const messagePage = document.getElementById('messagePage');
+            messagePage.classList.remove('active');
+        }
+
+        // Submit predefined response
+        function submitResponse(message) {
+            addMessageToList(message);
+            showSuccessMessage();
+            
+            // Animate button
+            setTimeout(() => {
+                const textarea = document.getElementById('messageInput');
+                textarea.value = '';
+            }, 500);
+        }
+
+        // Submit custom message
+        function submitCustomMessage() {
+            const textarea = document.getElementById('messageInput');
+            const message = textarea.value.trim();
+            
+            if (message === '') {
+                alert('Please write a message before sending! 💭');
+                textarea.focus();
+                return;
+            }
+            
+            if (message.length > 500) {
+                alert('Message is too long! Please keep it under 500 characters. 📝');
+                return;
+            }
+            
+            addMessageToList(message);
+            showSuccessMessage();
+            textarea.value = '';
+            textarea.focus();
+        }
+
+        // Add message to the received messages list
+        function addMessageToList(message) {
+            const messageList = document.getElementById('messageList');
+            const messagesReceived = document.getElementById('messagesReceived');
+            
+            // Remove the "no messages yet" placeholder if it exists
+            const placeholder = messageList.querySelector('p');
+            if (placeholder) {
+                placeholder.remove();
+            }
+            
+            // Create message element
+            const messageItem = document.createElement('div');
+            messageItem.className = 'message-item';
+            
+            // Get current time
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { 
+                hour: 'numeric', 
+                minute: '2-digit',
+                hour12: true 
+            });
+            const dateString = now.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric'
+            });
+            
+            messageItem.innerHTML = `
+                <div class="message-time">📅 ${dateString} at ${timeString}</div>
+                <div class="message-text">${escapeHtml(message)} <span class="message-heart">💕</span></div>
+            `;
+            
+            messageList.insertBefore(messageItem, messageList.firstChild);
+            
+            // Scroll to show new message
+            setTimeout(() => {
+                messagesReceived.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+            
+            // Save to localStorage
+            saveMessageToStorage(message);
+        }
+
+        // Show success message
+        function showSuccessMessage() {
+            let successMsg = document.querySelector('.success-message');
+            if (!successMsg) {
+                successMsg = document.createElement('div');
+                successMsg.className = 'success-message';
+                successMsg.innerHTML = '✨ Message sent! I will see this and treasure it forever! 💕';
+                const customMessage = document.querySelector('.custom-message');
+                customMessage.parentNode.insertBefore(successMsg, customMessage);
+            }
+            
+            successMsg.classList.add('show');
+            setTimeout(() => {
+                successMsg.classList.remove('show');
+            }, 4000);
+        }
+
+        // Save messages to localStorage
+        function saveMessageToStorage(message) {
+            try {
+                const messages = JSON.parse(localStorage.getItem('loveMessages') || '[]');
+                messages.push({
+                    text: message,
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('loveMessages', JSON.stringify(messages));
+            } catch (e) {
+                console.log('Could not save message, but it will display during this session');
+            }
+        }
+
+        // Load messages from localStorage on page load
+        function loadMessagesFromStorage() {
+            try {
+                const messages = JSON.parse(localStorage.getItem('loveMessages') || '[]');
+                if (messages.length > 0) {
+                    const messageList = document.getElementById('messageList');
+                    messageList.innerHTML = '';
+                    
+                    messages.forEach(msg => {
+                        const date = new Date(msg.timestamp);
+                        const timeString = date.toLocaleTimeString('en-US', { 
+                            hour: 'numeric', 
+                            minute: '2-digit',
+                            hour12: true 
+                        });
+                        const dateString = date.toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric'
+                        });
+                        
+                        const messageItem = document.createElement('div');
+                        messageItem.className = 'message-item';
+                        messageItem.innerHTML = `
+                            <div class="message-time">📅 ${dateString} at ${timeString}</div>
+                            <div class="message-text">${escapeHtml(msg.text)} <span class="message-heart">💕</span></div>
+                        `;
+                        messageList.appendChild(messageItem);
+                    });
+                }
+            } catch (e) {
+                console.log('Could not load messages from storage');
+            }
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Load messages when page loads
+        window.addEventListener('DOMContentLoaded', loadMessagesFromStorage);
+
+        // Allow Enter key to submit message in textarea
+        document.addEventListener('DOMContentLoaded', () => {
+            const textarea = document.getElementById('messageInput');
+            if (textarea) {
+                textarea.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && e.ctrlKey) {
+                        submitCustomMessage();
+                    }
+                });
+            }
+        });
+
+        // Create floating hearts
+        function createFloatingHearts() {
+            const container = document.getElementById('heartsContainer');
+            const hearts = ['💕', '💖', '💗', '💓', '💞', '💝'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (5 + Math.random() * 4) + 's';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        // Smooth scroll to section
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Refresh hearts periodically on surprise page
+        let heartInterval;
+        const surprisePage = document.getElementById('surprisePage');
+        const observer = new MutationObserver(() => {
+            if (surprisePage.classList.contains('active')) {
+                clearInterval(heartInterval);
+                heartInterval = setInterval(() => {
+                    const hearts = document.querySelectorAll('.heart');
+                    if (hearts.length < 10) {
+                        createFloatingHearts();
+                    }
+                }, 3000);
+            }
+        });
+
+        observer.observe(surprisePage, { attributes: true, attributeFilter: ['class'] });
+
+        // Add some easter eggs
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp' && e.altKey) {
+                alert('💕 I love you too! Remember to use your coupons... 😘');
+            }
+        });
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            hero.style.transform = `translateY(${window.scrollY * 0.5}px)`;
+        });
+    </script>
+</body>
+</html>
